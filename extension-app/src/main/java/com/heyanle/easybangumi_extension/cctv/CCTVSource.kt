@@ -1,8 +1,6 @@
 package com.heyanle.easybangumi_extension.cctv
 
 import com.heyanle.bangumi_source_api.api.component.Component
-import com.heyanle.easybangumi_extension.cctv.R
-import com.heyanle.easybangumi_extension.yhdm222.YhdmDetailedComponent
 import com.heyanle.extension_api.ExtensionIconSource
 import com.heyanle.extension_api.ExtensionSource
 

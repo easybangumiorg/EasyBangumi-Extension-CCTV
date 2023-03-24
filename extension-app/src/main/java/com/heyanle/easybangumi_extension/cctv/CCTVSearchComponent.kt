@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
  * Created by LoliBall on 2023/3/23 23:04.
  * https://github.com/WhichWho
  */
-class CCTVSearchComponent(source: Source) : ComponentWrapper(source), SearchComponent {
+class CCTVSearchComponent(override var source: Source) : ComponentWrapper(source), SearchComponent {
 
     override fun getFirstSearchKey(keyword: String) = 0
 
@@ -27,7 +27,7 @@ class CCTVSearchComponent(source: Source) : ComponentWrapper(source), SearchComp
                 .map {
                     CartoonCoverImpl(
                         id = it.id,
-                        source = it.url,
+                        source = source.key,
                         url = it.url,
                         title = it.name,
                         intro = it.name0,
