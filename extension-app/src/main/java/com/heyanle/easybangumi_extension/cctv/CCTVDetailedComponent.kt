@@ -4,7 +4,6 @@ import com.heyanle.bangumi_source_api.api.Source
 import com.heyanle.bangumi_source_api.api.SourceResult
 import com.heyanle.bangumi_source_api.api.component.ComponentWrapper
 import com.heyanle.bangumi_source_api.api.component.detailed.DetailedComponent
-import com.heyanle.bangumi_source_api.api.component.update.UpdateComponent
 import com.heyanle.bangumi_source_api.api.entity.Cartoon
 import com.heyanle.bangumi_source_api.api.entity.CartoonImpl
 import com.heyanle.bangumi_source_api.api.entity.CartoonSummary
@@ -30,15 +29,19 @@ class CCTVDetailedComponent(source: Source) :
         return withResult { playLines(summary) }
     }
 
-    private fun cartoon(summary: CartoonSummary) =
-        CartoonImpl(
+    private suspend fun cartoon(summary: CartoonSummary): CartoonImpl {
+        initCCTVIfEmpty()
+        val m3U8 = cctvSource.find { it.url == summary.id }
+        return CartoonImpl(
             id = summary.id,
             source = summary.source,
             url = summary.url,
-            title = "title",
+            title = m3U8?.name.orEmpty(),
+            coverUrl = m3U8?.logo
         )
+    }
 
     private fun playLines(summary: CartoonSummary) =
-        listOf(PlayLine(summary.id, "label", arrayListOf(summary.url)))
+        listOf(PlayLine(summary.id, "线路1", arrayListOf("移动")))
 
 }

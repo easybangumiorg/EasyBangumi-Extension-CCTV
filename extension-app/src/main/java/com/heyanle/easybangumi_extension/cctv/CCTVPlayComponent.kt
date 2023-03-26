@@ -18,7 +18,7 @@ class CCTVPlayComponent(source: Source) : ComponentWrapper(source), PlayComponen
         playLine: PlayLine,
         episodeIndex: Int
     ): SourceResult<PlayerInfo> {
-        return withResult { PlayerInfo(PlayerInfo.DECODE_TYPE_DASH, uri = summary.url) }
+        return withResult { PlayerInfo(PlayerInfo.DECODE_TYPE_HLS, uri = summary.url) }
     }
 
 }

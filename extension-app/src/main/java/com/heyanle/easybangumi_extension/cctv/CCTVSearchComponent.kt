@@ -26,7 +26,7 @@ class CCTVSearchComponent(override var source: Source) : ComponentWrapper(source
             val result = cctvSource.filter { it.name.contains(keyword, true) }
                 .map {
                     CartoonCoverImpl(
-                        id = it.id,
+                        id = it.url,
                         source = source.key,
                         url = it.url,
                         title = it.name,
