@@ -18,7 +18,7 @@ class CCTVDetailedComponent(source: Source) :
 
     override suspend fun getAll(summary: CartoonSummary): SourceResult<Pair<Cartoon, List<PlayLine>>> {
         return withResult(Dispatchers.IO) {
-            cartoon(summary) to playLines()
+            cartoon(summary) to playLines(summary)
         }
     }
 
@@ -27,7 +27,7 @@ class CCTVDetailedComponent(source: Source) :
     }
 
     override suspend fun getPlayLine(summary: CartoonSummary): SourceResult<List<PlayLine>> {
-        return withResult { playLines() }
+        return withResult { playLines(summary) }
     }
 
     private fun cartoon(summary: CartoonSummary) =
@@ -38,6 +38,7 @@ class CCTVDetailedComponent(source: Source) :
             title = "title",
         )
 
-    private fun playLines() = listOf(PlayLine("", "", arrayListOf()))
+    private fun playLines(summary: CartoonSummary) =
+        listOf(PlayLine(summary.id, "label", arrayListOf(summary.url)))
 
 }
